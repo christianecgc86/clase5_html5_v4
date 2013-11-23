@@ -1,0 +1,87 @@
+<!doctype HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			canvas {
+				border-style: solid;
+			}
+		</style>
+
+		<script src="../javascript/jquery-1.10.2.min.js"></script>
+		<script>
+			$(function() {
+
+				var elCanvas = $("canvas")[0];
+				var contexto = elCanvas.getContext("2d");
+
+				var imagen = new Image();
+				imagen.src = "../imagenes/grumpy_cat.jpg";
+
+				imagen.onload = function() {
+
+					//dibujamos la imagen
+					contexto.drawImage(imagen, 0, 0, 400, 500);
+				};
+
+				$(".mensajes").keyup(function() {
+
+					//dibujamos la imagen
+					contexto.drawImage(imagen, 0, 0, 400, 500);
+
+					//definimos la fuente
+					contexto.font = "40px Arial";
+					//le decimos que centre el texto
+					contexto.textAlign = "center";
+					//queremos que el texto sea de color blanco
+					contexto.fillStyle = "white";
+					contexto.strokeStyle = "black";
+
+					//dibujamos el texto de arriba
+					var textoArriba = $("#mensaje-arriba").val();
+					contexto.fillText(textoArriba, 200, 75);
+					contexto.strokeText(textoArriba, 200, 75);
+
+					//dibujamos el texto de abajo
+					var textoAbajo = $("#mensaje-abajo").val();
+					contexto.fillText(textoAbajo, 200, 470);
+					contexto.strokeText(textoAbajo, 200, 470);
+
+				});
+
+				$("#link-guardar").click(function(evento) {
+
+					var elEnlace = evento.target;
+					elEnlace.href = elCanvas.toDataURL();
+					elEnlace.download = "mi_meme.png";
+
+				});
+
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<canvas width="400" height="500">
+			Tu navegador no soporta Canvas
+		</canvas>
+		<p>
+			Mensaje Arriba
+			<input id="mensaje-arriba" class="mensajes" type="text" />
+		</p>
+		<p>
+			Mensaje Abajo
+			<input id="mensaje-abajo" class="mensajes" type="text" />
+		</p>
+		<p>
+			<a id="link-guardar" href="#">Guardar la imagen!</a>
+		</p>
+
+	</body>
+</html>

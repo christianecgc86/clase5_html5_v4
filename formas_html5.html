@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>formas html5</title>
+
+		<style type="text/css">
+			div {
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 10px;
+				border-style: solid;
+				padding: 80px;
+				width: 700px;
+			}
+
+			form {
+				border-style: solid;
+				border-color: blue;
+				padding: 20px;
+			}
+
+			label {
+				width: 250px;
+				display: inline-block;
+				text-align: right;
+			}
+
+			input {
+				width: 200px;
+			}
+
+			.boton {
+				text-align: center;
+			}
+
+			/* --- DEFINIMOS LOS ESTILOS PARA LOS INPUTS CUANDO ESTOS SON VALIDOS Y NO VALIDOS*/
+
+			input:required:invalid{
+				background-image: url(imagenes/invalido.png);
+				background-position: right top;
+				background-repeat: no-repeat;
+			}
+
+			input:required:valid {
+				background-image: url(imagenes/valido.png);
+				background-position: right top;
+				background-repeat: no-repeat;
+			}
+
+		</style>
+
+		<script src="javascript/jquery-1.10.2.min.js"></script>
+
+		<script>
+			$(function() {
+
+			});
+
+		</script>
+
+	</head>
+	<body>
+
+		<div >
+
+			<form method="get" action="ajax/procesa.php">
+
+				<p>
+					<label>Campo obligatorio(required):</label>
+					<input type="text" name="name" required>
+				</p>
+
+				<p>
+					<label>email(required):</label>
+					<input id="email" type="email" name="email" >
+				</p>
+
+				<p>
+					<label>url:</label>
+					<input type="url" name="website" >
+				</p>
+
+				<p>
+					<label>url(expresion regular):</label>
+					<input type="url" name="website" pattern="https?://[a-z]+.+com">
+				</p>
+
+				<p>
+					<label>edad(number):</label>
+					<input type="number" name="edad" min="18" max="99" value="21">
+					<br>
+				</p>
+				
+				<p>
+					<label>edad(rango):</label>
+					<input type="range" name="edad" min="18" max="99" value="21">
+					<br>
+				</p>							
+
+				<p class="boton">
+					<input type="submit" value="Enviar(ejemplo submit)">
+				</p>
+
+			</form>
+
+		</div>
+	</body>
+</html>

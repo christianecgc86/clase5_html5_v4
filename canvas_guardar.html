@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas</title>
+        <link rel="stylesheet" type="text/css" />
+        <style>
+			#lienzo {
+				border-style: solid;
+				border-width: 2px;
+			}
+        </style>
+        <script src="javascript/jquery-1.10.2.min.js"></script>
+        <script>
+			//obtenemos el canvas
+			$(function() {
+
+				var canvas = $("#lienzo")[0];
+				var contexto = canvas.getContext("2d");
+
+				//COMENTARIO C2
+				$("#link-guardar").click(function(evento) {
+					var elEnlace = evento.target;
+					elEnlace.href = canvas.toDataURL();
+					elEnlace.download = "miArchivo.png";
+				});
+
+				//propiedades de la linea
+				contexto.strokeStyle = "red";
+				contexto.lineWidth = 10;
+				contexto.lineCap = "butt";
+				contexto.fillStyle = "green";
+
+				contexto.beginPath();
+				contexto.moveTo(23, 34);
+				contexto.lineTo(100, 34);
+				contexto.lineTo(50, 100);
+				contexto.closePath();
+				contexto.stroke();
+				contexto.fill();
+
+				//AQUI OBTENEMOS LA IMAGEN QUE HEMOS GENERADO
+				//COMENTARIO C1
+				alert(canvas.toDataURL());
+
+			});
+
+        </script>
+
+    </head>
+    <body>
+        <canvas id="lienzo" width="500" height="300" ></canvas>
+        <p>
+            <a id="link-guardar" href="#" >Guardar</a>
+        </p>
+    </body>
+</html>

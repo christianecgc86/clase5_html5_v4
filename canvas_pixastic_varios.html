@@ -1,0 +1,108 @@
+<!doctype HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>pixastic</title>
+
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			div {
+				float: left;
+				margin-left: 30px;
+			}
+
+		</style>
+
+		<script src="javascript/jquery-1.10.2.min.js"></script>
+		<script src="javascript/pixastic.custom.js"></script>
+
+		<script>
+			$(function() {
+
+				// ------------- DESATURATE----------------------
+				//obtenemos la imagen
+				$("#imagen1").mouseover(function(evento) {
+
+					var imagen1 = evento.target;
+					Pixastic.process(imagen1, "desaturate");
+
+				});
+
+				// ------------- GLOW----------------------
+				$("#imagen2").mouseover(function(evento) {
+
+					Pixastic.process(evento.target, "glow", {
+						amount : 0.5 //cuanto brillo en la imagen
+					});
+
+				});
+
+				// ------------- NOISE ----------------------
+				$("#imagen3").mouseover(function(evento) {
+
+					Pixastic.process(evento.target, "noise", {
+						amount : 0.9, //cuantos puntitos de ruido , entre 0 y 1
+						strength : 1 //que tan intenso debe ser el ruido
+					});
+
+				});
+
+				// ------------- EMBOSS ----------------------
+				$("#imagen4").mouseover(function(evento) {
+
+					Pixastic.process(evento.target, "emboss", {
+						direction : "topright", //otros valores son  "topleft", "top", "right", "bottomright", "bottom", "bottomleft" y "left".
+						greyLevel : 200 //la intesidad del gris de 0 a 255
+					});
+
+				});
+
+				// ------------- SEPIA ----------------------
+				$("#imagen5").mouseover(function(evento) {
+
+					Pixastic.process(evento.target, "sepia");
+				});
+
+				// ------------- SOLARIZE ----------------------
+				$("#imagen6").mouseover(function(evento) {
+
+					Pixastic.process(evento.target, "solarize");
+				});
+
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<div>
+			<h1> Escala de Grises (desaturate) </h1>
+			<img id="imagen1" src="imagenes/imagen1.jpg"/>
+		</div>
+		<div>
+			<h1> Glow </h1>
+			<img id="imagen2" src="imagenes/imagen2.jpg"/>
+		</div>
+		<div>
+			<h1> Noise </h1>
+			<img id="imagen3" src="imagenes/imagen3.jpg"/>
+		</div>
+		<div>
+			<h1> Emboss </h1>
+			<img id="imagen4" src="imagenes/imagen4.jpg"/>
+		</div>
+		<div>
+			<h1> Sepia </h1>
+			<img id="imagen5"  src="imagenes/imagen5.jpg"/>
+		</div>
+
+		<div>
+			<h1> Solarize </h1>
+			<img id="imagen6"  src="imagenes/imagen6.jpg"/>
+		</div>
+
+	</body>
+</html>

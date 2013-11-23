@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			canvas {
+				border-style: solid;
+			}
+		</style>
+
+		<script src="javascript/jquery-1.10.2.min.js"></script>
+		<script>
+			$(function() {
+
+				var elCanvas = $("canvas")[0];
+				var contexto = elCanvas.getContext("2d");
+
+				// crear una linea roja
+				contexto.strokeStyle = "red";
+				contexto.moveTo(300, 20);
+				contexto.lineTo(300, 200);
+				contexto.stroke();
+
+				//estilos del texto
+				contexto.font = "40px Arial";
+
+				// alinear right
+				contexto.textAlign = "right";
+				contexto.fillText("textAlign=right", 300, 60);
+
+				//alinear left
+				contexto.textAlign = "left";
+				contexto.fillText("textAlign=left", 300, 120);
+
+				//alinear center
+				contexto.textAlign = "center";
+				contexto.fillText("textAlign=center", 300, 180);
+
+				//texto centradro
+				//note que el canvas mide 750 y tomamos la mitad para el eje x 
+				contexto.fillText("Este es un texto centrado", 350, 340);
+
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<canvas width="700" height="400">
+			Tu navegador no soporta Canvas
+		</canvas>
+
+	</body>
+</html>

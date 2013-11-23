@@ -1,0 +1,104 @@
+<!doctype HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>ejemplo rectangulo canvas</title>
+
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			canvas {
+				border-style: solid;
+			}
+		</style>
+
+		<script src="javascript/jquery-1.10.2.min.js"></script>
+
+		<script>
+			$(function() {
+
+				//DIBUJAMOS EN EL PRIMER CANVAS
+				//Obtenemos el objeto canvas de
+				var elCanvas = document.querySelector("#imagen-normal");
+				//obtenemos el contexto (2d)
+				var contexto = elCanvas.getContext("2d");
+
+				var imagen = new Image();
+				imagen.src = "imagenes/grumpy2_cat.jpg";
+
+				imagen.onload = function() {
+					contexto.drawImage(imagen, 0, 0);
+				};
+
+				//DIBUJAMOS EN EL SEGUNDO CANVAS
+				var elCanvas2 = document.querySelector("#imagen-filtro");
+				//obtenemos el contexto (2d)
+				var contexto2 = elCanvas2.getContext("2d");
+
+				var imagen2 = new Image();
+				imagen2.src = "imagenes/grumpy2_cat.jpg";
+
+				imagen2.onload = function() {
+
+					//dibujamos la imagen
+					contexto2.drawImage(imagen2, 0, 0);
+
+					//obtenemos el objeto que representa la informacion del canvas
+					var datosImagen = contexto2.getImageData(0, 0, elCanvas2.width, elCanvas2.height);
+
+					// regresa un arreglo que contiene en hilera todos los bytes de informacion de la imagen
+					var pixeles = datosImagen.data;
+
+					// Calculamos el número de píxeles que contiene la imagen,
+					// multiplicando el ancho por el alto, esto nos sirve para poder
+					// hacer un recorrido por los píxeles, porque si recordamos,
+					// su estructura es sun solo "chorizo" (arreglo de una dimensión).
+					var totalPixeles = datosImagen.width * datosImagen.height;
+
+					// Simplemente hacemos el recorrido por todos los píxeles de la imagen.
+					// Esta parte es muy importante, las operaciones
+					// numeroPixel*4, numeroPixel*4+1, numeroPixel*4+2, son necesarias para poder determinar la posición
+					// de un color del espectro de acuerdo al píxel actual de la iteración (for).
+					// Es decir que si 'pixeles' tiene la lista de píxeles, sería
+					// pixeles[numeroPixel*4+1] para obtener la intensidad del color verde en ese píxel.
+					// pixeles[numeroPixel*4] para el rojo y pixeles[i*4+2] para el azúl.
+					for (var numeroPixel = 0; numeroPixel < totalPixeles; numeroPixel++) {
+						var nuevoColor = 0;
+						// Hay muchas maneras de convertir una imagen en blanco y negro,
+						// pero en esta ocasión vamos a utilizar el método el promedio.
+						// Se promedian los 3 octetos (bytes) y se obtiene un valor que
+						// sería asignado a los mismos 3, de esta manera se convertiría en blanco y negro.
+						nuevoColor = (pixeles[numeroPixel * 4 + 1] + pixeles[numeroPixel * 4 + 2] + pixeles[numeroPixel * 4]) / 3;
+						pixeles[numeroPixel * 4] = nuevoColor;
+						pixeles[numeroPixel * 4 + 1] = nuevoColor;
+						pixeles[numeroPixel * 4 + 2] = nuevoColor;
+					}
+					// Ya que hemos modificado los píxeles, borramos el recuadro en la misma
+					// posición de la imagen y del mismo tamaño, para dejar el área libre
+					// para la imagen ya filtrada.
+					contexto2.clearRect(0, 0, datosImagen.width, datosImagen.height);
+					// Finalmente devolvemos esos bytes al canvas con putImageData del canvas mismo.
+					contexto2.putImageData(datosImagen, 0, 0);
+				};
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<div>
+			<canvas id="imagen-normal" width="625" height="625">
+
+			</canvas>
+		</div>
+
+		<div>
+			<canvas id="imagen-filtro" width="625" height="625">
+
+			</canvas>
+		</div>
+
+	</body>
+</html>

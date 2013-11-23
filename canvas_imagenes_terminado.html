@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+
+		<title>Canvas</title>
+
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			canvas {
+				border-style: solid;
+			}
+		</style>
+
+		<script src="javascript/jquery-1.10.2.min.js"></script>
+		<script>
+			$(function() {
+
+				var elCanvas = $("canvas")[0];
+				var contexto = elCanvas.getContext("2d");
+
+				var imagen = new Image();
+				//imagen.src = "http://imagenesfotos.com/wp-content/2012/01/paisajes_preciosos9.jpg";
+				imagen.src = "imagenes/paisaje.jpg";
+				imagen.onload = function() {
+					//imagen, posX, posY, ancho , alto
+					contexto.drawImage(imagen, 0, 0, 700, 400);
+
+					alert("ancho:" + imagen.width);
+					alert("alto:" + imagen.height);
+				};
+
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<canvas width="700" height="400">
+			Tu navegador no soporta Canvas
+		</canvas>
+
+	</body>
+</html>

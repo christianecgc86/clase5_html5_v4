@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- internacionalizacion en el siguiente texto -->
+		<title>Formulario de Registro</title>
+		<link rel="stylesheet" type="text/css" href="../css/estilos.css"/>
+		<style>			
+
+			.campo:required:invalid {
+				background-image: url(../imagenes/invalido.png);
+				background-position: right top;
+				background-repeat: no-repeat;
+			}
+
+			.campo:required:valid {
+				background-image: url(../imagenes/valido.png);
+				background-position: right top;
+				background-repeat: no-repeat;
+			}
+			
+			.campo{
+				width:200px;
+				transition:width 1s linear;
+			}
+			
+			.campo:focus{				
+				width:300px;
+			}
+
+		</style>
+		<script src="../javascript/jquery-1.10.2.min.js"></script>
+		<script>
+			$(function(){
+				var nombreInput =  $("#nombre")[0];
+				//nombreInput.setCustomValidity("El campo nombre es requerido");
+				
+				var paswordInput =  $("#password")[0];
+				//paswordInput.setCustomValidity("El campo password es requerido");
+				
+				var emailInput =  $("#email")[0];
+				//emailInput.setCustomValidity("El campo email es requerido");
+			});
+		</script>
+	</head>
+	<body>
+
+		<h1 id="titulo-forma">Formulario de registro</h1>
+
+		<form action="registrar" method="post">
+			<p>
+				Nombre<input type="text" id="nombre" name="nombre" class="campo" required placeholder="tu nombre"/>
+			</p>
+			<p>
+				Password<input type="text" id="password" name="password" class="campo" required placeholder="tu password"/>
+			</p>
+			<p>
+				Email<input type="text" id="email" name="email" class="campo" required placeholder="tu email"/>
+			</p>
+			<input type="submit" value="Registrar" />
+		</form>
+
+	</body>
+</html>

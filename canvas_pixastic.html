@@ -1,0 +1,43 @@
+<!doctype HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>pixastic</title>
+
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+
+		</style>
+
+		<script src="javascript/jquery-1.10.2.min.js"></script>
+		<script src="javascript/pixastic.custom.js"></script>
+
+		<script>
+			$(function() {
+
+				//obtenemos la imagen del DOM
+				var imagen = $("#imagen1")[0];
+
+				//procesamos la imagen con pixastic
+				var imagenDespues = Pixastic.process(imagen, "desaturate");
+
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<div>
+			<h1> Imagen original </h1>
+			<img src="imagenes/imagen1.jpg"/>
+		</div>
+
+		<div>
+			<h1> Escala de Grises (desaturate) </h1>
+			<img id="imagen1" src="imagenes/imagen1.jpg"/>
+		</div>
+
+	</body>
+</html>

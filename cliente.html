@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Chat en Vivo con Web Sockets</title>
+		<link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+		<style>
+			body {
+				font-family: "Orbitron";
+			}
+
+			#chat {
+				width: 700px;
+				border-radius: 10px;
+				background-color: #3b3b3b;
+				box-shadow: 1px 1px 5px 5px black;
+				padding: 30px;
+				margin-top: 40px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			h2 {
+				text-align: center;
+				text-shadow: 2px 2px 2px black;
+			}
+
+			h2, h4, p {
+				color: white;
+			}
+
+			h4 {
+				margin-bottom: 5px;
+			}
+
+			#mensajes, #mensaje-usuario, #nombre-usuario {
+				background-color: white;
+				border-radius: 6px;
+				min-height: 20px;
+			}
+
+			.mensaje {
+				padding: 5px;
+				border-bottom: 1px #3b3b3b solid;
+			}
+
+			span {
+				color: red;
+			}
+
+			#mensaje-usuario {
+				padding: 0px;
+				width: 100%;
+				border-width: 0px;
+				margin-bottom: 3px;
+			}
+
+		</style>
+		<script src="http://chat-diatom.rhcloud.com:8080/socket.io.js"></script>
+
+		<!-- <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+		<script type="text/javascript">
+			$(function() {
+
+				var PORT = 8080;
+				var IPADDRESS = '127.0.0.1';
+
+				var socket = io.connect(IPADDRESS + ":" + PORT);
+
+				var boton = $("#boton");
+				boton.click(function() {
+
+					var mensajeUsuario = $("#mensaje-usuario").val();
+					var nombreUsuario = $("#nombre-usuario").val();
+
+					console.debug("mensaje:" + mensajeUsuario);
+					console.debug("nombre:" + nombreUsuario);
+
+					socket.emit("mensaje_al_servidor", {
+						usuario : nombreUsuario,
+						mensaje : mensajeUsuario
+					});
+				});
+
+				socket.on("mensaje_al_cliente", function(data) {
+
+					var caja = "<div class='mensaje'>";
+					caja = caja + "<span>" + data.usuario + " dice:</span>" + data.mensaje;
+					caja = caja + "</div>";
+
+					console.debug("caja:" + caja);
+
+					$("#mensajes").append(caja);
+				});
+
+			});
+
+		</script>
+	</head>
+	<body>
+		<div id="chat">
+			<h2>Chat en Vivo</h2>
+			<h4>Mensajes de los usuarios:</h4>
+			<div id="mensajes"></div>
+			<p>
+				<label>Mensaje:</label>
+				<input id="mensaje-usuario" type="text" placeholder="Escriba su mensaje aqui"/>
+			</p>
+
+			<p>
+				<label>Usuario:</label>
+				<input id="nombre-usuario" type="text" placeholder="Su nombre aqui"/>
+			</p>
+
+			<button id="boton">
+				Enviar
+			</button>
+
+		</div>
+	</body>
+</html>
