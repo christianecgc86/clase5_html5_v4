@@ -5,7 +5,27 @@
 		<!-- internacionalizacion en el siguiente texto -->
 		<title>Formulario de Registro</title>
 		<link rel="stylesheet" type="text/css" href="../css/estilos.css"/>
-		<style>			
+		<style>		
+		
+			input:required:invalid{
+				background-image: url(../imagenes/invalido.png);
+				background-position: right top;
+				background-repeat: no-repeat;
+			}
+
+			input:required:valid {
+				background-image: url(../imagenes/valido.png);
+				background-position: right top;
+				background-repeat: no-repeat;
+			}	
+			
+			input{
+				transition: width 2s ease;
+			}
+			
+			input:focus{
+				width:400px;
+			}
 
 		</style>
 		<script src="../javascript/jquery-1.10.2.min.js"></script>
@@ -16,13 +36,13 @@
 
 		<form action="registrar" method="post">
 			<p>
-				Nombre<input type="text" id="nombre" name="nombre" class="campo"/>
+				Nombre<input type="text" id="nombre" name="nombre" class="campo" required placeholder="Tu nombre aquí" />
 			</p>
 			<p>
-				Password<input type="text" id="password" name="password" class="campo"/>
+				Password<input type="text" id="password" name="password" class="campo" required placeholder="Tu password aquí" />
 			</p>
 			<p>
-				Email<input type="text" id="email" name="email" class="campo" class="campo"/>
+				Email<input type="text" id="email" name="email" class="campo" class="campo" required placeholder="Tu e-mail aquí" />
 			</p>
 			<input type="submit" value="Registrar" />
 		</form>

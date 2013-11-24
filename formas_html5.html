@@ -54,6 +54,11 @@
 
 		<script>
 			$(function() {
+				
+				$("#boton-submit").click(function(){
+					var texto = $("#email").val();
+					alert(texto);
+				});
 
 			});
 
@@ -68,12 +73,12 @@
 
 				<p>
 					<label>Campo obligatorio(required):</label>
-					<input type="text" name="name" required>
+					<input type="text" name="name" required="required" required placeholder="Tu nombre aquí">
 				</p>
 
 				<p>
 					<label>email(required):</label>
-					<input id="email" type="email" name="email" >
+					<input id="email" type="email" name="email" required="required" >
 				</p>
 
 				<p>
@@ -99,7 +104,7 @@
 				</p>							
 
 				<p class="boton">
-					<input type="submit" value="Enviar(ejemplo submit)">
+					<input id="boton-submit" type="submit" value="Enviar(ejemplo submit)">
 				</p>
 
 			</form>

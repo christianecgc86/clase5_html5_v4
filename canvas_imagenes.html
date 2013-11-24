@@ -21,6 +21,19 @@
 
 				var elCanvas = $("canvas")[0];
 				var contexto = elCanvas.getContext("2d");
+				
+				elCanvas.width = 800;
+				
+				var imagen = new Image();
+				imagen.src = "imagenes/imagen1.jpg";
+				imagen.onload = function(){
+					alert(imagen.width);
+					alert(imagen.height);
+					contexto.drawImage(imagen,0,0,700,400);
+				};
+				
+				alert(elCanvas.width);
+				alert(elCanvas.height);
 
 			});
 		</script>

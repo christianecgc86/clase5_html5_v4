@@ -12,7 +12,25 @@
 		<script src="javascript/jquery-1.10.2.min.js"></script>
 		<script>
 			$(function() {
-			
+				var canvas = $("#lienzo")[0];
+				var contexto = canvas.getContext("2d");
+				
+				contexto.lineCap = "round";
+				//contexto.lineWidth = 20;// en pixeles
+				contexto.strokeStyle = "green"; //se deben definir los estilos del canvas antes del metodo stroke()
+				contexto.fillStyle = "orange";
+				
+				contexto.beginPath();
+				contexto.moveTo(20,20);
+				contexto.lineTo(200,20);
+				contexto.lineTo(100,100);
+				contexto.closePath();
+				contexto.stroke(); //borde
+				contexto.fill(); //relleno
+				
+				contexto.font = "40px Arial";
+				contexto.strokeText("Hola Canvas",50,50);
+				contexto.fillText("Hola Canvas",50,50);
 			});
 
 		</script>
